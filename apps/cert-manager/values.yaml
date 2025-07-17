@@ -1,3 +1,0 @@
-# https://artifacthub.io/packages/helm/cert-manager/cert-manager
-# crds.enabled: true
-installCRDs: true

@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://charts.jetstack.io
-    chart: cert-manager
-    targetRevision: v1.18.2
+    path: cert-manager
+    repoURL: https://github.com/nagarajurahul/helm-charts
+    targetRevision: HEAD
     helm:
       valueFiles:
         - values.yaml

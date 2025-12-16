@@ -26,3 +26,8 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
+      # - Replace=true # Never do this in production, replace can bring unexpected results
+# kube-prometheus-stack ships very large CRDs, Argo CD tries to PATCH CRDs, The CRDs contain huge OpenAPI schemas in annotations
+# Kubernetes rejects the patch as it cannot hold more than 256kb in its annotations, hence no resources( pv, ingress) are created defined inside values.yaml
+# https://www.arthurkoziel.com/fixing-argocd-crd-too-long-error/

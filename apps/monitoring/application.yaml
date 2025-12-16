@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring
+  namespace: argocd
+  labels:
+    app.kubernetes.io/managed-by: argocd
+spec:
+  project: default
+
+  source:
+    path: monitoring
+    repoURL: https://github.com/nagarajurahul/helm-charts
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+    
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

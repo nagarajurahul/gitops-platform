@@ -13,7 +13,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: metrics-server
+    namespace: kube-system
 
   source:
     repoURL: https://github.com/nagarajurahul/helm-charts

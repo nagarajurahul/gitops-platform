@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gatekeeper
+  namespace: argocd
+  labels:
+    app.kubernetes.io/managed-by: argocd
+  annotations:
+
+
+spec:
+  project: default
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gatekeeper-system
+
+  source:
+    repoURL: https://github.com/nagarajurahul/helm-charts
+    targetRevision: main
+    path: gatekeeper
+
+    helm:
+      valueFiles:
+      - values.yaml
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

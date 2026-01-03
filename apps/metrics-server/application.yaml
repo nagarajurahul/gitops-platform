@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: argocd
   annotations:
-
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 
 spec:
   project: default

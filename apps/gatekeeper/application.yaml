@@ -37,6 +37,10 @@ spec:
     kind: ValidatingWebhookConfiguration
     jsonPointers:
     - /webhooks
+  - group: batch
+    kind: Job
+    jsonPointers:
+    - /spec
 
   syncPolicy:
     automated:

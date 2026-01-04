@@ -25,22 +25,25 @@ spec:
       - values.yaml
 
   # ---------------------------------------------------------------------------
-  # VERY IMPORTANT: Ignore CRD diffs
-  # Helm manages Gatekeeper CRDs; ArgoCD must not fight it.
+  # CRITICAL: Argo CD must NOT manage Gatekeeper admission/webhook lifecycles
   # ---------------------------------------------------------------------------
   ignoreDifferences:
+  # Gatekeeper CRDs mutate constantly (status, versions, schemas)
   - group: apiextensions.k8s.io
     kind: CustomResourceDefinition
-    jsonPointers:
-    - /spec
+
+  # Gatekeeper admission webhooks are cluster-critical
   - group: admissionregistration.k8s.io
     kind: ValidatingWebhookConfiguration
-    jsonPointers:
-    - /webhooks
+    name: gatekeeper-validating-webhook-configuration
+
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
+    name: gatekeeper-mutating-webhook-configuration
+
+  # Helm hook jobs should not be tracked
   - group: batch
     kind: Job
-    jsonPointers:
-    - /spec
 
   syncPolicy:
     automated:
@@ -48,5 +51,4 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
-    - ServerSideApply=true
-    # REQUIRED for Gatekeeper + CRDs + webhook
+    - SkipHooks=true

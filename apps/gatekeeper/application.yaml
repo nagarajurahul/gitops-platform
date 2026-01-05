@@ -26,6 +26,7 @@ spec:
 
   # ---------------------------------------------------------------------------
   # CRITICAL: Argo CD must NOT manage Gatekeeper admission/webhook lifecycles
+  # This prevents: CRD drift fights, Webhook deletion deadlocks and Hook jobs blocking sync forever
   # ---------------------------------------------------------------------------
   ignoreDifferences:
   # Gatekeeper CRDs mutate constantly (status, versions, schemas)

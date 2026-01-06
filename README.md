@@ -1,2 +1,2 @@
-# gitops-infra
-gitops-infra
+# gitops-platform
+gitops-platform

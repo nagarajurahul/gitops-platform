@@ -17,12 +17,12 @@ spec:
           - path: config/clusters.yaml
   template:
     metadata:
-      name: metrics-server-{{name}}
+      name: metrics-server-{{name}}-{{env}}
     spec:
       project: platform
 
       destination:
-        name: "{{name}}" # cluster registered in Argo CD
+        name: "{{clusterName}}" # cluster name registered in Argo CD
         namespace: kube-system
 
       source:

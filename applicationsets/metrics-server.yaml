@@ -37,6 +37,6 @@ spec:
       syncPolicy:
         automated:
           prune: true
-          selfHeal:
+          selfHeal: true
         syncOptions:
           - CreateNamespace=true

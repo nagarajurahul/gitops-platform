@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: metrics-server
+  namespace: argocd
+  labels:
+    app.kubernetes.io/managed-by: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/nagarajurahul/gitops-platform
+        revision: main
+        files:
+          - path: config/clusters.yaml
+  template:
+    metadata:
+      name: metrics-server-{{name}}
+    spec:
+      project: platform
+
+      destination:
+        name: "{{name}}" # cluster registered in Argo CD
+        namespace: kube-system
+
+      source:
+        repoURL: https://github.com/nagarajurahul/helm-charts
+        targetRevision: main
+        chart: metrics-server
+
+        helm:
+          valueFiles:
+            - values.yaml
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal:
+        syncOptions:
+          - CreateNamespace=true

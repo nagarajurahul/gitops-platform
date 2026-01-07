@@ -28,7 +28,7 @@ spec:
       source:
         repoURL: https://github.com/nagarajurahul/helm-charts
         targetRevision: main
-        chart: metrics-server
+        path: metrics-server
 
         helm:
           valueFiles:

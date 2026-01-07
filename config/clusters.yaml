@@ -1,0 +1,3 @@
+clusters:
+  - name: prod-us-east-1
+    env: prod

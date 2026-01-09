@@ -33,6 +33,7 @@ spec:
         helm:
           valueFiles:
             - values.yaml
+            - values-enforce.yaml
 
       syncPolicy:
         automated:

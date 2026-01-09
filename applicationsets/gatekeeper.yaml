@@ -33,7 +33,6 @@ spec:
         helm:
           valueFiles:
             - values.yaml
-            - values-enforce.yaml
 
       syncPolicy:
         automated:
@@ -42,3 +41,8 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
+
+        ignoreDifferences:
+          # Gatekeeper CRDs are mutated at runtime (versions, schemas, status)
+          - group: apiextensions.k8s.io
+            kind: CustomResourceDefinition

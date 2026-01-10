@@ -36,6 +36,7 @@ spec:
           valueFiles:
             - values.yaml
             - values-{{env}}.yaml
+            - values-enforce-{{gatekeeperEnforce}}.yaml
 
       syncPolicy:
         automated:

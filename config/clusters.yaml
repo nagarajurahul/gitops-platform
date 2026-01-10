@@ -1,4 +1,4 @@
 - name: us-east-1
   clusterName: in-cluster #us-east-1-prod
   env: prod
-
+  gatekeeperEnforce: false
